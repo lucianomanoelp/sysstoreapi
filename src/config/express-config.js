@@ -1,10 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const dbConfigMiddleware = require('../middlewares/db-config-middleware');
-const dbConnectionMiddleware = require('../middlewares/db-connection-middleware');
-const dbQueryMiddleware = require('../middlewares/db-query-middleware');
-const modelsMiddleware = require('../middlewares/models-middleware');
-const errorMiddleware = require('../middlewares/error-middleware');
+const {
+  dbConfigMiddleware,
+  dbConnectionMiddleware,
+  dbQueryMiddleware,
+  modelsMiddleware,
+  errorMiddleware
+} = require('../middlewares');
+
 const app = express();
 
 app.use(bodyParser.json());
