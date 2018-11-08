@@ -18,7 +18,7 @@ const sql = `select bopa01servidor as hostDbConfig, bopa01usuario as userDbConfi
 const spa001 = dbquery => ({
 
   getByLoginSenha: ({ login, senha }) => dbquery(sql, [login, senha, 'Y'])
-    .then(([rows]) => rows[0])
+    .then(rows => rows[0])
     .then(row => {
       if (!row) return null;
 

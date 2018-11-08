@@ -5,9 +5,9 @@ const sqlLogin = `select bous04cod as id, lower(bous04nome) as nome, bous04senha
 
 const usu004 = dbquery => ({
 
-  getById: id => dbquery(sqlGetUsuario, [id]).then(([rows]) => rows[0]),
+  getById: id => dbquery(sqlGetUsuario, [id]).then(rows => rows[0]),
 
-  getByIdSenha: ({ id, senha }) => dbquery(sqlLogin, [id, senha]).then(([rows]) => rows[0])
+  getByIdSenha: ({ id, senha }) => dbquery(sqlLogin, [id, senha]).then(rows => rows[0])
   
 });
 

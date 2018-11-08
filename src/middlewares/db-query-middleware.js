@@ -1,4 +1,5 @@
 const dbquery = dbConnection => (sql, params) => dbConnection.execute(sql, params)
+  .then(([rows]) => rows)
   .catch(err => {
     console.log(err);
     throw new Error('Falha interna do servidor');

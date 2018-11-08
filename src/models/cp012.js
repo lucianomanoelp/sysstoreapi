@@ -2,7 +2,7 @@ const sql = `select bocp12cod as id, lower(bocp12nome) as nome, bocp12cnpj as cn
 
 const cp012 = dbquery => ({
 
-  list: ()  => dbquery(sql).then(([rows]) => rows)
+  list: ()  => dbquery(sql)
   
 });
 

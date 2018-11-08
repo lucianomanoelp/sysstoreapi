@@ -15,7 +15,6 @@ const sql = `select bous03prog as prog from USU003 where bous03cod = ? and bous0
 const usu003 = dbquery => ({
 
   getByIdGrupo: idGrupo => dbquery(sql, [idGrupo, 'S'])
-    .then(([rows]) => rows)
     .then(response => response.filter(permissao => programas.some(p => p === permissao.prog)))
   
 });

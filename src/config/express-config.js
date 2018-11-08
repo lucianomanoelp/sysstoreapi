@@ -15,6 +15,9 @@ app.use(modelsMiddleware());
 
 require('../routes/login-route')(app);
 require('../routes/usuario-route')(app);
+require('../routes/acessorios-route')(app);
+require('../routes/aparelho-route')(app);
+require('../routes/simcard-route')(app);
 
 app.use(errorMiddleware());
 
