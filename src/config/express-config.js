@@ -12,7 +12,7 @@ const {
 const app = express();
 
 app.use(cors({
-  allowedHeaders: ['Content-Type', 'Authorization', 'Lojas']
+  exposedHeaders: ['Lojas']
 }));
 app.use(bodyParser.json());
 app.use(dbConfigMiddleware());
