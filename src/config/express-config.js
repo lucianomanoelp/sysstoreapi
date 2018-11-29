@@ -11,9 +11,7 @@ const {
 
 const app = express();
 
-app.use(cors({
-  exposedHeaders: ['Lojas']
-}));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(dbConfigMiddleware());
 app.use(dbConnectionMiddleware());

@@ -7,7 +7,7 @@ const {
   sp019,
 } = require('../models');
 
-const modelsMiddleware = (req, res, next) => {
+const modelsMiddleware = (req, res, next) => {  
   const lojas = req.headers.lojas ? JSON.parse(req.headers.lojas) : [];
   const { dbquery } = req.appContext;
   const sistema = req.appContext.tokenDecoded ? req.appContext.tokenDecoded.sistema : '';  
