@@ -4,6 +4,7 @@ const cp012 = require('./cp012');
 const usu003 = require('./usu003');
 const sp002 = require('./sp002');
 const sp019 = require('./sp019');
+const usu005 = require('./usu005');
 
 module.exports = {
   spa001,
@@ -12,4 +13,5 @@ module.exports = {
   usu003,
   sp002,
   sp019,
+  usu005,
 };

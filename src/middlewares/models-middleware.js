@@ -5,6 +5,7 @@ const {
   usu003,
   sp002,
   sp019,
+  usu005
 } = require('../models');
 
 const modelsMiddleware = (req, res, next) => {  
@@ -20,6 +21,7 @@ const modelsMiddleware = (req, res, next) => {
       usu003: usu003(dbquery),
       sp002: sp002(dbquery, lojas, sistema),
       sp019: sp019(dbquery, lojas),
+      usu005: usu005(dbquery)
     }
   });
 

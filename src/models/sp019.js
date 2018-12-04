@@ -1,5 +1,24 @@
 const { getInitialPoint } = require('../utils/paginated-response-utils');
 
+const sqlResumoGeral = ({ lojas, dataInicial, dataFinal }) => new Promise((resolve) => resolve(
+  lojas.map(loja => 
+    `select bosp19aparelho, bosp19imei, bosp19item, bosp19data_compra, bosp19data_venda, 
+    bosp19iccid, bosp19tipo, bosp19comis, bosp19venda, bosp19rebate, bosp19plano, bosp19tec,
+    bosp19nota, bosp19deb, bosp19vlprice, bosp19vldeb, bosp19vlbonus, bosp19txcart, bosp19loja,
+    bosp19notantc, bosp19promoc, bosp19dt_alter, bosp19sta, bosp19lcnpj, bosp19combo, bosp19nota_venda,
+    bosp20tipo, bosp20claro, bosp26ativa, bosp26ativa, bosp26interno, bosp14plano_ant, bosp14imei_lc, 
+    bosp14vend, bocp12cod, bocp12nome, bosp37stac
+    from ${loja.cnpj}_SP19
+    inner join CP012 on bocp12cnpj = bosp19lcnpj
+    inner join SP020 on bosp20cod = bosp19plano
+    inner join SP026 on bosp26cod = bosp19tec
+    inner join ${loja.cnpj}_SP14 on bosp19data_venda = bosp14data and bosp19item = bosp14item and
+      bosp19imei = bosp14imei and bosp19aparelho = bosp14ctn
+    left join ${loja.cnpj}_SP37 on bosp19imei = bosp37imei
+    where bosp19data_venda >= '${dataInicial.toISOString()}' and
+      bosp19data_venda <= '${dataFinal.toISOString()}'`).join(' union ')
+));
+
 const sqlTotalAparelhos = lojas => new Promise((resolve) => resolve(
   'select count(*) as total from ('
   .concat(lojas.map(loja => `
@@ -101,7 +120,7 @@ const createSimcardsResponse = rows => rows.map(simcard => ({
 }));
 
 const sp019 = (dbquery, lojas) => ({
-
+  
   listAparelhos: (page, limit, filter = '') => {
     const paramFilter = lojas.map(() => `%${filter}%`);
     return sqlTotalAparelhos(lojas)
@@ -115,6 +134,11 @@ const sp019 = (dbquery, lojas) => ({
   listSimcards: (filter = '') => {
     return sqlSimcards(lojas)
       .then(sql => dbquery(sql, [`%${filter}%`]).then(createSimcardsResponse))
+  },
+
+  resumoGeral: ({ dataInicial, dataFinal }) => {
+    return sqlResumoGeral({ lojas, dataInicial, dataFinal })
+      .then(sql => dbquery(sql))
   }
 
 });
